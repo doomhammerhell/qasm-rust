@@ -228,7 +228,7 @@ pub fn process(input: &str, cwd: &Path) -> String {
 
     let include_regex = Regex::new(r#"include\s*"(?P<s>.*)";"#).unwrap(); // Regex for include statments
 
-    let replace_with_file = |caps: &Captures| {
+        let replace_with_file = |caps: &Captures| -> String {
         let path = cwd.join(&caps["s"]);
 
         let mut f = File::open(path).expect("Couldn't Open An Include File");
@@ -246,8 +246,8 @@ pub fn process(input: &str, cwd: &Path) -> String {
 /// Take a source string with no includes or comments and returns the tokens
 ///
 /// The source string can be processed with the [process](fn.process.html) function.
-/// The tokens are all varients of [Token](enum.Token.html). An illegal token will be returned
-/// for any unrechognised tokens.
+/// The tokens are all variants of [Token](enum.Token.html). An illegal token will be returned
+/// for any unrecognized tokens.
 ///
 /// ## Examples
 ///
@@ -283,7 +283,7 @@ pub fn lex(input: &str) -> Vec<token::Token> {
 
 /// Changes a vector of tokens into an AST.
 ///
-/// Parsing is done with the [parse](fn.parse.html) function. It accepts a vector of [Token](enum.Tokem.html)s
+/// Parsing is done with the [parse](fn.parse.html) function. It accepts a vector of [Token](enum.Token.html)s
 /// and returns a vector of [AstNode](enum.AstNode.html)s or an [Error](enum.Error.html) as a result
 ///
 /// ## Example

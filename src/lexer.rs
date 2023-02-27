@@ -81,7 +81,7 @@ impl<'a> Lexer<'a> {
                     Token::Equals
                 } else {
                     // Shouldn't Be A Single Equals!
-                    panic!("Error: Missing Charachter. Expected another `=`.");
+                    panic!("Error: Missing Character. Expected another `=`.");
                 }
             }
             Some('+') => Token::Plus,
