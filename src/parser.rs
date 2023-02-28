@@ -23,7 +23,7 @@ pub fn parse(tokens: &mut TokenStream) -> Result<Vec<AstNode>> {
         return Err(Error::UnsupportedVersion);
     }
 
-    while let Some(token) = tokens.peek() {
+    while let Some(_token) = tokens.peek() {
         let node = parse_node(tokens)?;
         nodes.push(node);
     }
