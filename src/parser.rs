@@ -2,15 +2,13 @@
 //! Most methods are not documented, and should only be accessed
 //! indirectly from the `parse` method.
 
-use std::iter::Peekable;
-use token::Token;
-use error::Error;
 use ast::{Argument, AstNode};
+use error::Error;
+use std::iter::Peekable;
 use std::result;
+use token::Token;
 
-const SUPPORTED_VERSIONS: [f32; 1] = [
-    2.0,
-];
+const SUPPORTED_VERSIONS: [f32; 1] = [2.0];
 
 type TokenStream<'a> = Peekable<std::slice::Iter<'a, Token>>;
 type Result<T> = result::Result<T, Error>;
@@ -48,8 +46,7 @@ fn parse_node(tokens: &mut TokenStream) -> Result<AstNode> {
 }
 
 pub fn version(tokens: &mut TokenStream) -> Result<f32> {
-    match_token(tokens, Token::OpenQASM)
-        .map_err(|_| Error::MissingVersion)?;
+    match_token(tokens, Token::OpenQASM).map_err(|_| Error::MissingVersion)?;
     let version = match_real(tokens)?;
     match_semicolon(tokens)?;
 

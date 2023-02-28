@@ -167,20 +167,20 @@
 //! ```
 extern crate regex;
 
-mod token;
-mod lexer;
-mod error;
-mod parser;
 mod ast;
+mod error;
+mod lexer;
+mod parser;
+mod token;
 
+use regex::{Captures, Regex};
 use std::fs::File;
 use std::io::prelude::*;
-use regex::{Captures, Regex};
 use std::path::Path;
 
-pub use error::Error;
 pub use ast::Argument;
 pub use ast::AstNode;
+pub use error::Error;
 pub use token::Token;
 
 type Result<T> = std::result::Result<T, Error>;
@@ -228,7 +228,7 @@ pub fn process(input: &str, cwd: &Path) -> String {
 
     let include_regex = Regex::new(r#"include\s*"(?P<s>.*)";"#).unwrap(); // Regex for include statments
 
-        let replace_with_file = |caps: &Captures| -> String {
+    let replace_with_file = |caps: &Captures| -> String {
         let path = cwd.join(&caps["s"]);
 
         let mut f = File::open(path).expect("Couldn't Open An Include File");
