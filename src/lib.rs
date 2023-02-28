@@ -317,7 +317,7 @@ pub fn lex(input: &str) -> Vec<token::Token> {
 ///
 /// // Ok([QReg("a", 3), ApplyGate("CX", [Qubit("a", 0), Qubit("a", 1)], [])])
 /// ```
-pub fn parse(tokens: &Vec<token::Token>) -> Result<Vec<AstNode>> {
+pub fn parse(tokens: &[token::Token]) -> Result<Vec<AstNode>> {
     let mut tokens = tokens.iter().peekable();
     parser::parse(&mut tokens)
 }

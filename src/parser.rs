@@ -252,7 +252,7 @@ pub fn match_id_list(tokens: &mut TokenStream) -> Result<Vec<String>> {
 }
 
 pub fn match_mathexpr(tokens: &mut TokenStream) -> Result<String> {
-    if let None = tokens.peek() {
+    if tokens.peek().is_none() {
         return Err(Error::SourceError);
     }
 
@@ -291,9 +291,9 @@ pub fn match_mathexpr(tokens: &mut TokenStream) -> Result<String> {
         };
 
         tokens.next();
-        expr_string.push_str(" ");
+        expr_string.push(' ');
         expr_string.push_str(&string);
-        expr_string.push_str(" ");
+        expr_string.push(' ');
     }
 
     Ok(expr_string)
@@ -329,7 +329,7 @@ pub fn match_nninteger(tokens: &mut TokenStream) -> Result<i32> {
 }
 
 pub fn match_identifier(tokens: &mut TokenStream) -> Result<String> {
-    if let None = tokens.peek() {
+    if tokens.peek().is_none() {
         return Err(Error::SourceError);
     }
     match tokens.next() {
